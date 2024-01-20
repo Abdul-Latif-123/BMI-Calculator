@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</head>
+
+<body class="bg-white">
+    <div class="m-5 p-5" style="background-color: #F1F1F1;">
+        <div class="d-flex align-items-center mb-3">
+            <img src="./img1.png" alt="">
+            <div class="ms-4">
+                <h1 style="color: #AE0000;">BMI Calculator</h1>
+                <h4 style="color: #AE0000;">Body Mass Index</h4>
+            </div>
+        </div>
+
+        <div class="bg-white py-4 px-5">
+
+            <div class="d-flex align-items-center justify-content-evenly">
+
+                <div class="me-5">
+                    <span style="color: gray;">GENDER</span><br>
+
+                    <input type="radio" class="btn-check" name="options-outlined" id="male-outlined" autocomplete="off"
+                        checked>
+                    <label class="btn btn-outline-warning" for="male-outlined">Male</label>
+
+                    <input type="radio" class="btn-check" name="options-outlined" id="female-outlined"
+                        autocomplete="off">
+                    <label class="btn btn-outline-warning" for="female-outlined">Female</label>
+
+                    <div class="form-outline mt-4" style="width: 18rem;">
+                        <span style="color: gray;">HEIGHT</span>
+                        <input min="10" max="304" type="number" id="heightvalue" class="form-control"
+                            placeholder="centimeters" />
+                    </div>
+                </div>
+
+                <div class="">
+                    <div class="form-outline" style="width: 18rem;">
+                        <span style="color: gray;">AGE</span>
+                        <input min="2" max="120" type="number" id="agevalue" class="form-control" placeholder="years" />
+                    </div>
+
+                    <div class="form-outline mt-4" style="width: 18rem;">
+                        <span style="color: gray;">WEIGHT</span>
+                        <input min="1" max="200" type="number" id="weightvalue" class="form-control"
+                            placeholder="kilograms" />
+                    </div>
+                </div>
+
+                <div class="ms-5 p-5 text-center" style="background-color: #DBDBDB;">
+                    <h5 style="color: #B62020;">Your BMI is</h5>
+                    <h3 class="m-4" style="width: 336px;"><span class="px-2 py-1" id="result1"
+                            style="color: #272727;">--</span></h3>
+                    <p id="result2" style="font-weight: bold;">(Enter your details and click on Calculate your BMI)</p>
+                </div>
+
+            </div>
+
+            <div class="text-center mt-4">
+                <button style="background-color: #E77817;" class="text-white btn rounded-pill px-4"
+                    onclick="calculateBMI()">Calculate BMI</button>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+
+        resultDisp1 = document.getElementById("result1");
+        resultDisp2 = document.getElementById("result2");
+
+        function calculateBMI() {
+
+            weightVal = document.getElementById("weightvalue").value;
+            heightVal = (document.getElementById("heightvalue").value) / 100;
+
+            resultBMI = parseFloat(weightVal / (heightVal * heightVal)).toFixed(2);
+
+            if (resultBMI != "NaN" && resultBMI != "Infinity")
+            {
+                resultDisp1.textContent = resultBMI;
+                resultDisp1.style.backgroundColor = "#E2AFAF";
+            }
+            else
+            {
+                resultDisp1.textContent = "--";
+                resultDisp1.style.backgroundColor = "";
+                resultDisp2.style.color = "#212529";
+                resultDisp2.textContent = "(Enter your details and click on Calculate your BMI)";
+            }
+
+            if (resultBMI < 18.5 && resultBMI != "NaN") {
+                resultDisp2.textContent = "You are Underweight.";
+                resultDisp2.style.color = "#FFD737";
+            }
+            else if (resultBMI >= 18.5 && resultBMI <= 24.9) {
+                resultDisp2.textContent = "You are having Normal weight.";
+                resultDisp2.style.color = "#2DC222";
+            }
+            else if (resultBMI > 24.9 && resultBMI <= 29.9) {
+                resultDisp2.textContent = "You are Overweight.";
+                resultDisp2.style.color = "#EC9E17";
+            }
+            else if (resultBMI > 29.9 && resultBMI <= 35) {
+                resultDisp2.textContent = "You are Obese.";
+                resultDisp2.style.color = "#EC4A17";
+            }
+            if (resultBMI > 35 && resultBMI != "Infinity") {
+                resultDisp2.textContent = "You are having Morbid obesity.";
+                resultDisp2.style.color = "#8c0000";
+            }
+        }
+
+    </script>
+</body>
+
+</html>
